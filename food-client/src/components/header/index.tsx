@@ -19,7 +19,7 @@ const Header = (props: Props) => {
       <Grid style={{ background: "white", height: "57px", display: "flex" }}>
         <Grid
           xs={6}
-          style={{
+          sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -27,7 +27,7 @@ const Header = (props: Props) => {
         >
           <Pinecone color="black" />
           <Button
-            style={{
+            sx={{
               color: "#18BA51",
               fontSize: "14px",
               fontWeight: "700",
@@ -37,7 +37,7 @@ const Header = (props: Props) => {
             НҮҮР
           </Button>
           <Button
-            style={{
+            sx={{
               color: "black",
               fontSize: "14px",
               fontWeight: "700",
@@ -47,7 +47,7 @@ const Header = (props: Props) => {
             ХООЛНЫ ЦЭС
           </Button>
           <Button
-            style={{
+            sx={{
               color: "black",
               fontSize: "14px",
               fontWeight: "700",
@@ -59,7 +59,7 @@ const Header = (props: Props) => {
         </Grid>
         <Grid
           xs={6}
-          style={{
+          sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -89,7 +89,7 @@ const Header = (props: Props) => {
             <Stack direction="row" spacing={1}>
               <Bucket />
               <Typography
-                style={{ fontSize: "14px", fontWeight: "700", color: "black" }}
+                sx={{ fontSize: "14px", fontWeight: "700", color: "black" }}
               >
                 Сагс
               </Typography>
@@ -97,7 +97,7 @@ const Header = (props: Props) => {
             <Stack direction="row" spacing={1}>
               <Vector />
               <Typography
-                style={{ fontSize: "14px", fontWeight: "700", color: "black" }}
+                sx={{ fontSize: "14px", fontWeight: "700", color: "black" }}
               >
                 Нэвтрэх
               </Typography>

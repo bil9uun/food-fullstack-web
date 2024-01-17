@@ -17,7 +17,7 @@ const Footer = (props: Props) => {
   ];
   return (
     <Stack
-      style={{
+      sx={{
         background: "#18BA51",
         width: "100%",
         height: "545px",
@@ -28,7 +28,7 @@ const Footer = (props: Props) => {
         paddingBottom: "114px",
       }}
     >
-      <Stack style={{ width: "100%", height: "100%" }} spacing="40px">
+      <Stack sx={{ width: "100%", height: "100%" }} spacing="40px">
         <Stack
           spacing={1}
           direction="row"
@@ -37,7 +37,7 @@ const Footer = (props: Props) => {
         >
           <Pinecone color="white" />
           <Typography
-            style={{ color: "white", fontWeight: "700", fontSize: "20px" }}
+            sx={{ color: "white", fontWeight: "700", fontSize: "20px" }}
           >
             Food Delivery
           </Typography>
@@ -47,7 +47,7 @@ const Footer = (props: Props) => {
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          style={{
+          sx={{
             fontSize: "16px",
             fontWeight: "590",
             color: "white",
@@ -70,12 +70,12 @@ const Footer = (props: Props) => {
         <Stack sx={{ width: "100%", height: "1px", background: "white" }} />
         <Stack spacing={1} justifyContent="center" alignItems="center">
           <Typography
-            style={{ fontSize: "16px", fontWeight: "400", color: "white" }}
+            sx={{ fontSize: "16px", fontWeight: "400", color: "white" }}
           >
             © 2024 Pinecone Foods LLC
           </Typography>
           <Typography
-            style={{ fontSize: "16px", fontWeight: "400", color: "white" }}
+            sx={{ fontSize: "16px", fontWeight: "400", color: "white" }}
           >
             Зохиогчийн эрх хуулиар хамгаалагдсан.
           </Typography>

@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import {
   Grid,
   Typography,
@@ -10,10 +10,12 @@ import {
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { Pinecone, Bucket, Search, Vector } from "../icons/";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const Header = (props: Props) => {
+  const router = useRouter();
   return (
     <Box width="100vw">
       <Grid style={{ background: "white", height: "57px", display: "flex" }}>
@@ -32,6 +34,9 @@ const Header = (props: Props) => {
               fontSize: "14px",
               fontWeight: "700",
               marginLeft: "40px",
+            }}
+            onClick={() => {
+              router.push("/");
             }}
           >
             НҮҮР
@@ -75,7 +80,7 @@ const Header = (props: Props) => {
           >
             <TextField
               id="outlined-basic"
-              label="Search"
+              label=" Search"
               size="small"
               placeholder="Search Here"
               InputProps={{
@@ -87,20 +92,33 @@ const Header = (props: Props) => {
               }}
             />
             <Stack direction="row" spacing={1}>
-              <Bucket />
-              <Typography
-                sx={{ fontSize: "14px", fontWeight: "700", color: "black" }}
+              <Button
+                startIcon={<Bucket />}
+                sx={{
+                  marginLeft: "8px",
+                  fontSize: "14px",
+                  fontWeight: "700",
+                  color: "black",
+                }}
               >
                 Сагс
-              </Typography>
+              </Button>
             </Stack>
             <Stack direction="row" spacing={1}>
-              <Vector />
-              <Typography
-                sx={{ fontSize: "14px", fontWeight: "700", color: "black" }}
+              <Button
+                startIcon={<Vector />}
+                sx={{
+                  marginLeft: "8px",
+                  fontSize: "14px",
+                  fontWeight: "700",
+                  color: "black",
+                }}
+                onClick={() => {
+                  router.push("/login");
+                }}
               >
                 Нэвтрэх
-              </Typography>
+              </Button>
             </Stack>
           </Stack>
         </Grid>

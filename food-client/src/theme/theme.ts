@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { colors } from "./colors";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -18,5 +19,6 @@ export const theme = createTheme({
   spacing: 4,
   palette: {
     mode: "light",
+    primary: colors.primary,
   },
 });

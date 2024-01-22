@@ -8,8 +8,7 @@ import CardSale from "@/components/card/cardSale";
 export default function Home() {
   return (
     <main>
-      <Grid container>
-        <Header />
+      <Grid>
         <Stack spacing={5}>
           <CardDefault />
           <CardSale />
@@ -24,7 +23,6 @@ export default function Home() {
             </div>
           </div>
         </Stack>
-        <Footer />
       </Grid>
     </main>
   );

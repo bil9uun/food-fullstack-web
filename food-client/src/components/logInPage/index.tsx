@@ -41,7 +41,7 @@ const LogInPage = (props: Props) => {
           </Typography>
         </Stack>
         <Stack spacing={"32px"}>
-          <Button label="Нэвтрэх" disabled={true} />
+          <Button label="Нэвтрэх" disabled={false} />
           <Typography sx={{ color: "#3F4145", alignSelf: "center" }}>
             Эсвэл
           </Typography>

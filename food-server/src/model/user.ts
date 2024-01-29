@@ -33,10 +33,15 @@ const userSchema = new Schema({
     type: Date,
     default: new Date(),
   },
+  otp: {
+    type: String,
+    default: "",
+  },
 });
+
 userSchema.pre("save", async function () {
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  // const salt = await bcrypt.genSalt(10);
+  // this.password = await bcrypt.hash(this.password, salt);
 });
 
 const User = model("User", userSchema);

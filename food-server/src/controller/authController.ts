@@ -5,9 +5,7 @@ import jwt from "jsonwebtoken";
 const signIn = async (req: Request, res: Response) => {
   try {
     const newUser = req.body;
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newUser.password, salt);
-    const user = await User.create({ ...newUser, password: hashedPassword });
+    const user = await User.create({ ...newUser });
     res.status(201).json({ message: "Шинэ хэрэглэгч амжилттай бүртгэгдлээ" });
   } catch (error) {
     res

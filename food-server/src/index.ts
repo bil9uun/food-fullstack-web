@@ -6,16 +6,28 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes";
 import verifyRoutes from "./routes/verifyRoutes";
 import userRoutes from "./routes/userRoutes";
+import foodRoutes from "./routes/foodRoutes";
+import categoryRoutes from "./routes/categoryRoutes";
+import uploadRoutes from "./routes/uploadRoutes";
 
 dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI as string;
 
 const app: Application = express();
-app.use(cors());
-app.use(express.json());
 
 connectDB(MONGO_URI);
+
+app.use(cors());
+app.use(express.json());
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/verify", verifyRoutes);
+app.use("/categories", categoryRoutes);
+app.use("/foods", foodRoutes);
+app.use("/upload", uploadRoutes);
+
+app.listen(8080, () => console.log(color.rainbow("Server is running")));
 
 // app.get("/user", async (req: Request, res: Response) => {
 //   const newUser = {
@@ -25,9 +37,3 @@ connectDB(MONGO_URI);
 //   };
 //   res.json({ message: "Shine hereglegch uuslee" });
 // });
-
-app.use("/auth", authRoutes);
-app.use("/verify", verifyRoutes);
-app.use("/users", userRoutes);
-
-app.listen(8080, () => console.log(color.rainbow("Server is running")));

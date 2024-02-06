@@ -18,7 +18,14 @@ const Header = (props: Props) => {
   const router = useRouter();
   return (
     <Box width="100vw">
-      <Grid style={{ background: "white", height: "57px", display: "flex" }}>
+      <Grid
+        style={{
+          background: "white",
+          height: "57px",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Grid
           xs={6}
           sx={{

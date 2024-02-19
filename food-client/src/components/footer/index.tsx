@@ -21,7 +21,7 @@ const Footer = (props: Props) => {
         background: "#18BA51",
         width: "100%",
         height: "545px",
-        backgroundImage: 'url("/footerSvg.svg")',
+        backgroundImage: 'url("/images/footerSvg.svg")',
         paddingTop: "114px",
         paddingLeft: "120px",
         paddingRight: "120px",

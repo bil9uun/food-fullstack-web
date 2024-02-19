@@ -11,11 +11,20 @@ import {
 import TextField from "@mui/material/TextField";
 import { Pinecone, Bucket, Search, Vector } from "../icons/";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import BasketDrawer from "../basketDrawer";
 
 type Props = {};
 
 const Header = (props: Props) => {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Box width="100vw">
       <Grid
@@ -107,9 +116,11 @@ const Header = (props: Props) => {
                   fontWeight: "700",
                   color: "black",
                 }}
+                onClick={handleOpen}
               >
                 Сагс
               </Button>
+              <BasketDrawer open={open} handleClose={handleClose} />
             </Stack>
             <Stack direction="row" spacing={1}>
               <Button

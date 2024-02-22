@@ -84,6 +84,7 @@ export default function CategoryModal({
             <VisuallyHiddenInput type="file" onChange={handleFileChange} />
           </MuiButton>
           <Button label="нэмэх" onClick={handleSave}></Button>
+          {handleClose}
         </Box>
       </Modal>
     </div>

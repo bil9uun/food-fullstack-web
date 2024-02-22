@@ -11,11 +11,10 @@ import { ColorPreview } from "@/components/color-utils";
 
 // ----------------------------------------------------------------------
 
-export default function FoodCard({ product }: any) {
+export default function FoodCard({ food }: any) {
   const renderStatus = (
     <Label
       variant="filled"
-      color={(product.status === "sale" && "error") || "info"}
       sx={{
         zIndex: 9,
         top: 16,
@@ -24,15 +23,15 @@ export default function FoodCard({ product }: any) {
         textTransform: "uppercase",
       }}
     >
-      {product.status}
+      {food.status}
     </Label>
   );
 
   const renderImg = (
     <Box
       component="img"
-      alt={product.name}
-      src={product.cover}
+      alt={food.name}
+      src={food.image}
       sx={{
         top: 0,
         width: 1,
@@ -53,13 +52,29 @@ export default function FoodCard({ product }: any) {
           textDecoration: "line-through",
         }}
       >
-        {product.priceSale && fCurrency(product.priceSale)}
+        {food.priceSale && fCurrency(food.priceSale)}
       </Typography>
       &nbsp;
-      {fCurrency(product.price)}
+      {fCurrency(food.price)}
     </Typography>
   );
 
+  const renderDescription = (
+    <Typography
+      variant="caption"
+      sx={{ fontSize: "12px", color: "gray", mb: 2 }}
+    >
+      Тайлбар: {food.description}
+    </Typography>
+  );
+  const renderCategory = (
+    <Typography
+      variant="caption"
+      sx={{ fontSize: "12px", color: "black", mb: 2 }}
+    >
+      Ангилал: {food.category.name}
+    </Typography>
+  );
   return (
     <Card
       sx={{
@@ -69,14 +84,14 @@ export default function FoodCard({ product }: any) {
       }}
     >
       <Box sx={{ pt: "100%", position: "relative" }}>
-        {product.status && renderStatus}
+        {food.status && renderStatus}
 
         {renderImg}
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>
         <Link color="inherit" underline="hover" variant="subtitle2" noWrap>
-          {product.name}
+          {food.name}
         </Link>
 
         <Stack
@@ -84,9 +99,10 @@ export default function FoodCard({ product }: any) {
           alignItems="center"
           justifyContent="space-between"
         >
-          <ColorPreview colors={product.colors} />
           {renderPrice}
         </Stack>
+        {renderCategory}
+        {renderDescription}
       </Stack>
     </Card>
   );

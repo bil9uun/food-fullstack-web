@@ -1,5 +1,7 @@
 import ThemeProvider from "@/theme";
 import "./globals.css";
+import CategoryProvider from "@/context/categoryContext";
+import FoodProvider from "@/context/foodContext";
 
 export default function RootLayout({
   children,
@@ -9,7 +11,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <CategoryProvider>
+            <FoodProvider>{children}</FoodProvider>
+          </CategoryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

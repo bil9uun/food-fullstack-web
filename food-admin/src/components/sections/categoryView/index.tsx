@@ -12,33 +12,33 @@ import CategoryCard from "./category-card";
 import CategorySort from "./category-sort";
 import CategorySearch from "./category-search";
 
+import axios from "axios";
+
 // ----------------------------------------------------------------------
 import { faker } from "@faker-js/faker";
+import { useContext, useEffect, useState } from "react";
+import { CategoryContext } from "@/context/categoryContext";
+import CategoryModal from "@/components/categoryModal";
 
 // ----------------------------------------------------------------------
-
-const CATEGORY_TITLES = [
-  "Whiteboard Templates",
-  "Tesla Cybertruck-inspired",
-  "Designify Agency",
-  "✨What is Done is Done ✨",
-  "Fresh Prince",
-  "Six Socks Studio",
-  "vincenzo de cotiis",
-];
-
-export const categories = [...Array(CATEGORY_TITLES.length)].map(
-  (_, index) => ({
-    id: faker.string.uuid(),
-    cover: `/assets/images/covers/cover_${index + 1}.jpg`,
-    title: CATEGORY_TITLES[index + 1],
-    createdAt: faker.date.past(),
-  })
-);
 
 // ----------------------------------------------------------------------
 
 export default function CategoryView() {
+  const { categories } = useContext(CategoryContext);
+  // console.log(categories);
+
+  //For Modal
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const { handleChangeModalInput, handleFileChange, uploadImage } =
+    useContext(CategoryContext);
   return (
     <Container>
       <Stack
@@ -53,6 +53,7 @@ export default function CategoryView() {
           variant="contained"
           color="inherit"
           startIcon={<Iconify icon="eva:plus-fill" />}
+          onClick={handleOpen}
         >
           Шинэ ангилал
         </Button>
@@ -64,7 +65,7 @@ export default function CategoryView() {
         alignItems="center"
         justifyContent="space-between"
       >
-        <CategorySearch categories={categories} />
+        {/* <CategorySearch categories={categories} /> */}
         <CategorySort
           options={[
             { value: "latest", label: "Cүүлийнх" },
@@ -75,10 +76,17 @@ export default function CategoryView() {
       </Stack>
 
       <Grid container spacing={3}>
-        {categories.map((categories: any) => (
-          <CategoryCard key={categories.id} categories={categories} />
+        {categories.map((category: any) => (
+          <CategoryCard category={category} />
         ))}
       </Grid>
+      <CategoryModal
+        handleClose={handleClose}
+        open={open}
+        handleChange={handleChangeModalInput}
+        handleFileChange={handleFileChange}
+        handleSave={uploadImage}
+      />
     </Container>
   );
 }

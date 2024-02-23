@@ -52,48 +52,20 @@ const CategoryProvider = ({ children }: PropsWithChildren) => {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFile(e.currentTarget.files![0]);
   };
-  // const createCategory = async () => {
-  //   try {
-  //     const formData = new FormData();
-  //     // formData.set("name", categoryForm.name);
-  //     // formData.set("description", categoryForm.description);
-  //     // formData.set("image", file!);
-  //     const { data } = await axios.post(
-  //       "http://localhost:8080/categories",
-  //       formData
-  //     );
-  //     console.log("data", data);
-  //     setCategories([...categories, data.categories]);
-  //   } catch (error) {
-  //     console.log("ERROR IN CREATECATEGORY FUNCTION");
-  //   }
-  // };
+
   const createCategory = async () => {
     try {
-      const data = await axios
-        .post("http://localhost:8080/categories", {
-          name: categoryForm.name,
-          description: categoryForm.description,
-          image: categoryForm.image,
-        })
-        .then((res) => res.data);
-      setCategories([...categories, data.newCategory]);
+      await axios.post("http://localhost:8080/categories", {
+        name: categoryForm.name,
+        description: categoryForm.description,
+        image: categoryForm.image,
+      });
+      // setCategories([...categories, data.newCategory]);
     } catch (error) {
-      console.log("ERROR IN CREATECATEGORY FUNCTION");
+      console.log("ERROR IN CREATECATEGORY FUNCTION", error);
     }
   };
-  // const uploadImage = async () => {
-  //   try {
-  //     const formData = new FormData();
 
-  //     formData.set("image", file!);
-  //     const image = await axios.post("http://localhost:8080/upload", formData);
-  //     categoryForm.image = image.data.url;
-  //     createCategory();
-  //   } catch (error) {
-  //     console.log("ERROR IN UPLOAD IMAGE FUNCTION", error);
-  //   }
-  // };
   const uploadImage = async () => {
     try {
       const formData = new FormData();
@@ -103,8 +75,10 @@ const CategoryProvider = ({ children }: PropsWithChildren) => {
         formData
       );
       console.log("data cat photo", data);
-      categoryForm.image = data;
+      categoryForm.image = data.image_url;
+      console.log("Zuragaa hadgalchlaa");
       createCategory();
+      console.log("crete cat ajilchlaa");
     } catch (error) {
       console.log("ERROR IN UPLOAD IMAGE FUNCTION", error);
     }

@@ -64,6 +64,9 @@ const Header = (props: Props) => {
               fontWeight: "700",
               marginLeft: "40px",
             }}
+            onClick={() => {
+              router.push("/menu");
+            }}
           >
             ХООЛНЫ ЦЭС
           </Button>

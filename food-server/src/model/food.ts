@@ -10,6 +10,7 @@ const foodSchema = new Schema({
   price: {
     type: Number,
     default: 0,
+    require: [true, "Hoolnii une zaaval oruulna"],
   },
   discountPrice: {
     type: Number,
@@ -27,7 +28,7 @@ const foodSchema = new Schema({
   category: {
     type: Schema.ObjectId,
     ref: "Category",
-    require: true,
+    require: [true, "Hoolnii category zaaval oruulna"],
   },
   createdAt: {
     type: Date,

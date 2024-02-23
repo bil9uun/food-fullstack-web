@@ -26,9 +26,9 @@ export const ControlSection = () => {
   ];
   return (
     <div>
-      {datas.map((data: Array) => {
+      {/* {datas.map((data: Array) => {
         <ControlSectionCard data={data} />;
-      })}
+      })} */}
     </div>
   );
 };

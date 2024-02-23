@@ -12,25 +12,25 @@ import {
 
 type Props = {};
 
-const CardDefault = (props: Props) => {
+const CardDefault = ({ filteredFood }: any) => {
   return (
     <React.Fragment>
-      <Card sx={{ width: 282 }}>
+      <Card sx={{ width: 282, marginRight: "10px" }}>
         <CardMedia
           sx={{ height: 186, borderRadius: "16px" }}
-          image="/images/food1.jpeg"
+          image={filteredFood.image}
           title="food1"
         />
         <CardContent sx={{ padding: "0px", marginTop: "14px" }}>
           <Typography
             style={{ fontSize: "20px", fontWeight: 590, color: "black" }}
           >
-            Өглөөний хоол
+            {filteredFood.name}
           </Typography>
           <Typography
             sx={{ fontSize: "18px", fontWeight: 600, color: "#18BA51" }}
           >
-            4,800₮
+            {filteredFood.price}₮
           </Typography>
         </CardContent>
       </Card>

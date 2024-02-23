@@ -13,6 +13,7 @@ const categorySchema = new Schema({
   },
   image: {
     type: String,
+    required: [true, "Кат зураг оруулна уу"],
     default: "no-category-photo",
   },
   createdAt: {

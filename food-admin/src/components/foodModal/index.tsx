@@ -1,26 +1,28 @@
-import * as React from "react";
+"use client";
+import React from "react";
 import {
   Box,
   Button as MuiButton,
   Typography,
+  Input as MuiInput,
   Modal,
   Grid,
   Stack,
   styled,
+  Switch,
   FormControlLabel,
-  FormGroup,
-  Checkbox,
-  SelectChangeEvent,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  FormHelperText,
+  SelectChangeEvent,
 } from "@mui/material";
 import Image from "next/image";
-import { Remove, Add, Close } from "@mui/icons-material";
+import { Remove, Add, Close, CheckBox } from "@mui/icons-material";
 import { Button, Input } from "../core";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { CategoryContext } from "@/context/categoryContext";
+import { useContext, useState } from "react";
 
 const style = {
   position: "absolute" as "absolute",
@@ -47,16 +49,30 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export default function FoodModal({ handleClose, openFilter }: any) {
-  const [age, setAge] = React.useState("");
+export default function FoodModal({
+  handleClose,
+  open,
+  handleChange,
+  handleFileChange,
+  handleSave,
+  checked,
+  handleChangeSwitch,
+}: any) {
+  const label = { inputProps: { "aria-label": "Switch demo" } };
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
+  //For Category Selector
+  const [category, setCategory] = useState("");
+
+  const handleChangeSelect = (e: SelectChangeEvent) => {
+    setCategory(e.target.value as string);
   };
+  const { categories } = useContext(CategoryContext);
+  console.log("hicats", categories);
+
   return (
     <div>
       <Modal
-        open={openFilter}
+        open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -69,49 +85,70 @@ export default function FoodModal({ handleClose, openFilter }: any) {
             </MuiButton>
           </Stack>
 
-          <Input label="Name" desc="Хоолны нэрийг оруулна уу" />
-          <Input label="Price" desc="Үнийн дүнг оруулна уу" />
-          <Input label="Description" desc="Write food Description" />
-          <Stack>
-            <Input label="Discount" desc="Хямдралын хувийг оруулна уу" />
-            <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="sale"
-              />
-            </FormGroup>
+          <Input
+            name="name"
+            label="Name"
+            desc="Write food name"
+            onChange={handleChange}
+          />
+          <Input
+            name="price"
+            label="Price"
+            desc="Write food price"
+            onChange={handleChange}
+          />
+          <Stack display="flex" flexDirection="row" alignItems="center">
+            <Switch
+              name="isSale"
+              checked={checked}
+              onChange={handleChangeSwitch}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <Typography>Sale</Typography>
           </Stack>
-          <Stack>
-            <FormControl sx={{ m: 1, minWidth: 120 }} required>
-              <InputLabel id="demo-simple-select-disabled-label">
-                Катигори
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-disabled-label"
-                id="demo-simple-select-disabled"
-                value={age}
-                label="Катигори"
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-              <FormHelperText>Required</FormHelperText>
-            </FormControl>
-          </Stack>
+          <Input
+            name="discountPrice"
+            label="Discount Price"
+            desc="Write food discount price"
+            onChange={handleChange}
+          />
+          <Input
+            name="description"
+            label="Description"
+            desc="Write food Description"
+            onChange={handleChange}
+          />
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">
+              Select Category
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={category}
+              label="Select Category"
+              name="category"
+              onChange={handleChange}
+            >
+              {categories.map((category: any) => {
+                return (
+                  <MenuItem key={category._id} value={category._id}>
+                    {category.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
           <MuiButton
             component="label"
             variant="contained"
             startIcon={<CloudUploadIcon />}
           >
             Upload file
-            <VisuallyHiddenInput type="file" />
+            <VisuallyHiddenInput type="file" onChange={handleFileChange} />
           </MuiButton>
-          <Button label="нэмэх"></Button>
+          <Button label="нэмэх" onClick={handleSave}></Button>
+          {handleClose}
         </Box>
       </Modal>
     </div>

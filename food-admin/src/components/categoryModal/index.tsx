@@ -41,7 +41,6 @@ const VisuallyHiddenInput = styled("input")({
 export default function CategoryModal({
   handleClose,
   open,
-  newCategory,
   handleChange,
   handleFileChange,
   handleSave,

@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { PropsWithChildren, createContext, useState } from "react";
 
 interface IUserContext {
@@ -24,9 +25,16 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
     address: "",
     password: "",
   });
-
+  const logIn = async (email: string, password: string) => {
+    try {
+      await axios.post("http://localhost:8080/auth/logIn", { email, password });
+    } catch (error) {
+      // alert("Nevtrehed aldaa garlaa");
+      console.log("Login Err", error);
+    }
+  };
   return (
-    <UserContext.Provider value={{ user, logIn: () => {} }}>
+    <UserContext.Provider value={{ user, logIn }}>
       {children}
     </UserContext.Provider>
   );

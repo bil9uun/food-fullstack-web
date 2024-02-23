@@ -16,27 +16,61 @@ import FoodSort from "./food-sort";
 import { sample } from "lodash";
 import { faker } from "@faker-js/faker";
 import { FoodContext } from "@/context/foodContext";
+import Iconify from "@/components/iconify";
+import { Button } from "@mui/material";
+import FoodModal from "@/components/foodModal";
 
 export default function FoodView() {
-  const [openFilter, setOpenFilter] = useState(false);
+  // const [openFilter, setOpenFilter] = useState(false);
 
-  const handleOpenFilter = () => {
-    setOpenFilter(true);
+  // const handleOpenFilter = () => {
+  //   setOpenFilter(true);
+  // };
+
+  // const handleCloseFilter = () => {
+  //   setOpenFilter(false);
+  // };
+
+  //For Modal
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
-
-  const { foods } = useContext(FoodContext);
+  const {
+    foods,
+    handleChangeModalInput,
+    uploadImage,
+    handleFileChange,
+    handleChangeSwitch,
+    checked,
+  } = useContext(FoodContext);
   console.log("foods data = ", foods);
 
   return (
     <Container>
-      <Typography variant="h4" sx={{ mb: 5 }}>
-        Хоолны жагсаалт
-      </Typography>
-
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mb={5}
+      >
+        <Typography variant="h4" sx={{ mb: 5 }}>
+          Хоолны жагсаалт
+        </Typography>
+        <Button
+          variant="contained"
+          color="inherit"
+          startIcon={<Iconify icon="eva:plus-fill" />}
+          onClick={handleOpen}
+        >
+          Шинэ хоол
+        </Button>
+      </Stack>
       <Stack
         direction="row"
         alignItems="center"
@@ -62,7 +96,15 @@ export default function FoodView() {
           </Grid>
         ))}
       </Grid>
-
+      <FoodModal
+        handleClose={handleClose}
+        open={open}
+        handleChange={handleChangeModalInput}
+        handleFileChange={handleFileChange}
+        handleSave={uploadImage}
+        handleChangeSwitch={handleChangeSwitch}
+        checked={checked}
+      />
       {/* <ProductCartWidget /> */}
     </Container>
   );

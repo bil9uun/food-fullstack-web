@@ -1,8 +1,11 @@
 import { Box, Button, Divider, Drawer, Typography } from "@mui/material";
 import { FaChevronLeft } from "react-icons/fa";
 
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DrawerCard from "./drawerCard";
+import { BasketContext } from "@/context/basketContext";
+import { UserContext } from "@/context/userProvider";
+import axios from "axios";
 
 interface IBasketDrawerModal {
   open: boolean;
@@ -10,6 +13,9 @@ interface IBasketDrawerModal {
 }
 
 const BasketDrawer = ({ handleClose, open }: IBasketDrawerModal) => {
+  const { basketFoods } = useContext(BasketContext);
+  console.log("basketFoods in client", basketFoods);
+
   return (
     <>
       <React.Fragment>
@@ -26,7 +32,9 @@ const BasketDrawer = ({ handleClose, open }: IBasketDrawerModal) => {
               <Typography></Typography>
             </Box>
             <Divider />
-            <DrawerCard />
+            {basketFoods.map((basketFood: any) => {
+              return <DrawerCard basketFood={basketFood} />;
+            })}
           </Box>
         </Drawer>
       </React.Fragment>

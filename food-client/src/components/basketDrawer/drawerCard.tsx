@@ -15,15 +15,7 @@ const style = {
   borderRadius: 5,
 };
 
-const backgroundImageStyle = {
-  backgroundImage: 'url("/assets/food-1.jpg")',
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  width: "245px",
-  height: "150px",
-};
-
-const DrawerCard = () => {
+const DrawerCard = ({ basketFood }: any) => {
   const [count, setCount] = React.useState(1);
 
   const handleCount = (operation: string) => {
@@ -33,12 +25,18 @@ const DrawerCard = () => {
       setCount(count - 1);
     }
   };
+  const backgroundImageStyle = {
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "245px",
+    height: "150px",
+  };
 
   return (
     <>
       <Box sx={style} m={5}>
         <Grid container display={"flex"} flexDirection={"row"} gap={10}>
-          <Grid item xs={5} style={backgroundImageStyle}></Grid>
+          <img src={basketFood.food.image} style={backgroundImageStyle} />
           <Grid
             item
             xs={5}
@@ -52,13 +50,13 @@ const DrawerCard = () => {
               </MuiButton>
             </Grid>
             <Grid display={"flex"} flexDirection={"column"}>
-              <Typography fontWeight={600}>Bowl</Typography>
+              <Typography fontWeight={600}>{basketFood.food.name}</Typography>
               <Typography sx={{ color: "#18BA51" }} fontWeight={600}>
-                18,800
+                {basketFood.food.price}
               </Typography>
 
               <Typography color={"gray"}>
-                Өндөг, шош, улаан лооль, өргөст хэмт, байцаа, салмон.
+                {basketFood.food.description}
               </Typography>
 
               <div>
@@ -75,7 +73,7 @@ const DrawerCard = () => {
                 </MuiButton>
                 <input
                   type="text"
-                  value={count}
+                  value={basketFood.count}
                   style={{
                     width: "60px",
                     border: "none",

@@ -15,7 +15,7 @@ interface IFood {
   false: boolean;
   description: string;
   image: string;
-  category: string;
+  category: { name: string; _id: string };
   createdAt: string;
 }
 interface IFoodContext {

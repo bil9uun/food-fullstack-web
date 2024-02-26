@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardMedia,
@@ -9,13 +9,21 @@ import {
   Stack,
   Modal,
 } from "@mui/material";
+import CardModal from "../cardModal";
 
 type Props = {};
 
 const CardDefault = ({ filteredFood }: any) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <React.Fragment>
-      <Card sx={{ width: 282, marginRight: "10px" }}>
+      <Card
+        sx={{ width: 282, marginRight: "10px" }}
+        onClick={() => handleOpen()}
+      >
         <CardMedia
           sx={{ height: 186, borderRadius: "16px" }}
           image={filteredFood.image}
@@ -33,6 +41,14 @@ const CardDefault = ({ filteredFood }: any) => {
             {filteredFood.price}₮
           </Typography>
         </CardContent>
+
+        {open && (
+          <CardModal
+            handleClose={handleClose}
+            open={open}
+            food={filteredFood}
+          />
+        )}
       </Card>
       {/* <Modal
         aria-labelledby="close-modal-title"

@@ -11,8 +11,9 @@ import {
 import TextField from "@mui/material/TextField";
 import { Pinecone, Bucket, Search, Vector } from "../icons/";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BasketDrawer from "../basketDrawer";
+import { UserContext } from "@/context/userProvider";
 
 type Props = {};
 
@@ -25,6 +26,7 @@ const Header = (props: Props) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const { userInLocalStorage } = useContext(UserContext);
   return (
     <Box width="100vw">
       <Grid
@@ -126,20 +128,34 @@ const Header = (props: Props) => {
               <BasketDrawer open={open} handleClose={handleClose} />
             </Stack>
             <Stack direction="row" spacing={1}>
-              <Button
-                startIcon={<Vector />}
-                sx={{
-                  marginLeft: "8px",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                  color: "black",
-                }}
-                onClick={() => {
-                  router.push("/login");
-                }}
-              >
-                Нэвтрэх
-              </Button>
+              {userInLocalStorage ? (
+                <Button
+                  startIcon={<Vector />}
+                  sx={{
+                    marginLeft: "8px",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                    color: "black",
+                  }}
+                >
+                  {userInLocalStorage.name}
+                </Button>
+              ) : (
+                <Button
+                  startIcon={<Vector />}
+                  sx={{
+                    marginLeft: "8px",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                    color: "black",
+                  }}
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                >
+                  Нэвтрэх
+                </Button>
+              )}
             </Stack>
           </Stack>
         </Grid>

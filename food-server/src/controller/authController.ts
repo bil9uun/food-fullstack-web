@@ -16,17 +16,19 @@ const signIn = async (req: Request, res: Response) => {
 
 const logIn = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
-    console.log("LOGIN", email);
-    const user = await User.findOne({ email }).select("+password");
-
+    const { userEmail, userPassword } = req.body;
+    console.log("LOGIN", userEmail);
+    const user = await User.findOne({ email: userEmail })
+      .select("+password")
+      .lean();
+    console.log("User", user);
     if (!user) {
       return res
         .status(400)
-        .json({ message: `${email}-тэй хэрэглэгч бүртгэлгүй байна.` });
+        .json({ message: `${userEmail}-тэй хэрэглэгч бүртгэлгүй байна.` });
     }
 
-    const isValid = await bcrypt.compare(password, user.password);
+    const isValid = await bcrypt.compare(userPassword, user.password);
 
     if (!isValid) {
       return res
@@ -41,7 +43,12 @@ const logIn = async (req: Request, res: Response) => {
       process.env.JWT_PRIVATE_KEY as string,
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
-    res.status(201).json({ message: "Хэрэглэгч амжилттай нэвтэрлээ", token });
+    const { password, ...otherParams } = user;
+    res.status(201).send({
+      message: "Хэрэглэгч амжилттай нэвтэрлээ",
+      token,
+      user: otherParams,
+    });
   } catch (error) {
     res
       .status(400)

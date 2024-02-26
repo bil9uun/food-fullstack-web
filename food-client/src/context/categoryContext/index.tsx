@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 interface ICategory {
+  _id: string;
   name: string;
   description: string;
   image: string;
@@ -36,8 +37,6 @@ const CategoryProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     getCategories();
   }, []);
-
- 
 
   return (
     <CategoryContext.Provider

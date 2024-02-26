@@ -11,7 +11,7 @@ import { UserContext } from "@/context/userProvider";
 type Props = {};
 
 const SignInPage = (props: Props) => {
-  const { logIn } = useContext(UserContext);
+  const { signIn } = useContext(UserContext);
 
   const validationSchema = yup.object({
     name: yup
@@ -42,9 +42,9 @@ const SignInPage = (props: Props) => {
   });
 
   const formik = useFormik({
-    onSubmit: ({ email, password }) => {
+    onSubmit: ({ email, password, name, address }) => {
       console.log(email), console.log(password);
-      logIn(email, password);
+      signIn(email, password, name, address);
     },
     initialValues: {
       email: "",

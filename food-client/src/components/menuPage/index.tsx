@@ -28,16 +28,19 @@ const MenuPage = () => {
         ))}
       </Stack>
 
-      <Stack display="flex" flexDirection="row">
-        {filteredFoods.map((filteredFood: any) => {
-          return <CardDefault filteredFood={filteredFood} />;
-        })}
-      </Stack>
-      {/* <Stack display="flex" flexDirection="row">
-        {foods.map((filteredFood: any) => {
-          return <CardDefault filteredFood={filteredFood} />;
-        })}
-      </Stack> */}
+      {filteredFoods ? (
+        <Stack display="flex" flexDirection="row">
+          {filteredFoods.map((filteredFood: any) => {
+            return <CardDefault filteredFood={filteredFood} />;
+          })}
+        </Stack>
+      ) : (
+        <Stack display="flex" flexDirection="row">
+          {foods.map((food: any) => {
+            return <CardDefault filteredFood={food} />;
+          })}
+        </Stack>
+      )}
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import { Router } from "express";
 import {
-  createBasket,
+  // createBasket,
+  deleteBasket,
   getBasket,
-  updateBasket,
+  addToBasketByUserId,
+  // updateBasket,
 } from "../controller/basketController";
 import { authenticate } from "../middleware/auth";
 
@@ -10,8 +12,9 @@ const router = Router();
 
 router
   .route("/")
-  .post(createBasket)
-  .get(authenticate, getBasket)
-  .put(updateBasket);
+  .post(authenticate, addToBasketByUserId)
+  .get(authenticate, getBasket);
+
+router.route("/:foodId").delete(authenticate, deleteBasket);
 
 export default router;

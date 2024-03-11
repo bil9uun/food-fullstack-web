@@ -7,6 +7,7 @@ import {
   Link,
   Button,
   Stack,
+  Badge,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { Pinecone, Bucket, Search, Vector } from "../icons/";
@@ -14,12 +15,14 @@ import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import BasketDrawer from "../basketDrawer";
 import { UserContext } from "@/context/userProvider";
+import { BasketContext } from "@/context/basketContext";
 
 type Props = {};
 
 const Header = (props: Props) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const { basketFoods } = useContext(BasketContext);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -114,7 +117,11 @@ const Header = (props: Props) => {
             />
             <Stack direction="row" spacing={1}>
               <Button
-                startIcon={<Bucket />}
+                startIcon={
+                  <Badge badgeContent={basketFoods?.length} color="primary">
+                    <Bucket />
+                  </Badge>
+                }
                 sx={{
                   marginLeft: "8px",
                   fontSize: "14px",

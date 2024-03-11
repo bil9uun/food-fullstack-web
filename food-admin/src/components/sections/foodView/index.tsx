@@ -13,8 +13,7 @@ import FoodSort from "./food-sort";
 // import ProductCartWidget from "./product-cart-widget";
 
 // ----------------------------------------------------------------------
-import { sample } from "lodash";
-import { faker } from "@faker-js/faker";
+
 import { FoodContext } from "@/context/foodContext";
 import Iconify from "@/components/iconify";
 import { Button } from "@mui/material";

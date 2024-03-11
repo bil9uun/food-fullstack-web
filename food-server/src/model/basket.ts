@@ -12,6 +12,7 @@ const basketSchema = new Schema({
       count: Number,
     },
   ],
+  totalPrice: { type: Number, require: true },
 });
 
 const Basket = model("Basket", basketSchema);

@@ -9,6 +9,7 @@ import { UserProvider } from "@/context/userProvider";
 import CategoryProvider from "@/context/categoryContext";
 import FoodProvider from "@/context/foodContext";
 import BasketProvider from "@/context/basketContext";
+import { OrderProvider } from "@/context/orderContext";
 
 export default function RootLayout({
   children,
@@ -20,16 +21,18 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <UserProvider>
-            <BasketProvider>
-              <CategoryProvider>
-                <FoodProvider>
-                  <Header />
-                  {children}
-                  <Footer />
-                  <ToastContainer />
-                </FoodProvider>
-              </CategoryProvider>
-            </BasketProvider>
+            <OrderProvider>
+              <BasketProvider>
+                <CategoryProvider>
+                  <FoodProvider>
+                    <Header />
+                    {children}
+                    <Footer />
+                    <ToastContainer />
+                  </FoodProvider>
+                </CategoryProvider>
+              </BasketProvider>
+            </OrderProvider>
           </UserProvider>
         </ThemeProvider>
       </body>

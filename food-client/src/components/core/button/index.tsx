@@ -5,7 +5,7 @@ interface IButtonProps {
   label: ReactNode;
   disabled?: boolean;
   btnType?: "contained" | "outlined" | "text";
-  onClick?: () => void;
+  onClick?: any;
 }
 
 const Button = ({

@@ -16,6 +16,7 @@ import Iconify from "@/components/iconify";
 // import Searchbar from "./common/searchbar";
 import { NAV, HEADER } from "./config-layout";
 import AccountPopover from "./common/account-popover";
+import { Typography } from "@mui/material";
 
 // ----------------------------------------------------------------------
 

@@ -15,15 +15,18 @@ type Props = {};
 
 const CardDefault = ({ filteredFood }: any) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    console.log("Close");
+    setOpen(false);
+  };
 
   return (
     <React.Fragment>
-      <Card
-        sx={{ width: 282, marginRight: "10px" }}
-        onClick={() => handleOpen()}
-      >
+      <Card sx={{ width: 282, marginRight: "10px" }} onClick={handleOpen}>
         <CardMedia
           sx={{ height: 186, borderRadius: "16px" }}
           image={filteredFood.image}

@@ -10,6 +10,7 @@ import foodRoutes from "./routes/foodRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import uploadRoutes from "./routes/uploadRoutes";
 import basketRoutes from "./routes/basketRoutes";
+import orderRoutes from "./routes/orderRoutes";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use("/categories", categoryRoutes);
 app.use("/foods", foodRoutes);
 app.use("/upload", uploadRoutes);
 app.use("/basket", basketRoutes);
+app.use("/order", orderRoutes);
 
 app.listen(8080, () => console.log(color.rainbow("Server is running")));
 

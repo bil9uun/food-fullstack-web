@@ -18,6 +18,7 @@ interface IInputProps {
   errorText?: string | undefined;
   showPassword?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  desc?: string;
 }
 
 const Input = ({
@@ -27,6 +28,7 @@ const Input = ({
   onChange,
   errorText,
   name,
+  desc,
 }: IInputProps) => {
   const [isShowPassword, setIsShowPassword] = useState(showPassword);
   return (
@@ -38,7 +40,7 @@ const Input = ({
           name={name}
           onChange={onChange}
           sx={{ backgroundColor: "#ECEDF0" }}
-          placeholder={label}
+          placeholder={desc}
           type={isShowPassword ? "password" : "text"}
           endAdornment={
             showPassword && (

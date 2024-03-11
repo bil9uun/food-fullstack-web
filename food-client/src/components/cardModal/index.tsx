@@ -34,14 +34,28 @@ interface ICardModal {
 }
 
 export default function CardModal({ handleClose, open, food }: ICardModal) {
-  const { addBasket } = useContext(BasketContext);
+  const { updateFoodToBasket, addBasket } = useContext(BasketContext);
   const [count, setCount] = React.useState(1);
+
+  const handleCount = (operation: string) => {
+    if (operation === "add") {
+      if (count < 10) setCount(count + 1);
+    } else {
+      if (count !== 1) setCount(count - 1);
+    }
+  };
   const HandleSendFood = () => {
-    addBasket(food, count);
+    addBasket({
+      foodId: food._id,
+      count: count,
+      totalPrice: count * food.price,
+    });
     handleClose();
   };
 
   const router = useRouter();
+
+  console.log("SDT", open);
 
   return (
     <Stack>
@@ -71,7 +85,9 @@ export default function CardModal({ handleClose, open, food }: ICardModal) {
             >
               <Grid item xs={2} position={"relative"}>
                 <MuiButton
-                  onClick={handleClose}
+                  onClick={() => {
+                    handleClose();
+                  }}
                   sx={{ ml: 80, position: "absolute" }}
                 >
                   <Close />
@@ -125,7 +141,7 @@ export default function CardModal({ handleClose, open, food }: ICardModal) {
                     Тоо
                   </Typography>
                   <Box display={"flex"} alignItems={"center"}>
-                    <MuiButton onClick={() => setCount((num) => num - 1)}>
+                    <MuiButton onClick={() => handleCount("min")}>
                       <Remove
                         sx={{
                           bgcolor: "#18BA51",
@@ -138,7 +154,7 @@ export default function CardModal({ handleClose, open, food }: ICardModal) {
                       />
                     </MuiButton>
                     <Typography>{count}</Typography>
-                    <MuiButton onClick={() => setCount((num) => num + 1)}>
+                    <MuiButton onClick={() => handleCount("add")}>
                       <Add
                         sx={{
                           bgcolor: "#18BA51",

@@ -6,7 +6,7 @@ export const getUsers = async (req: Request, res: Response) => {
   console.log("Headers", req.headers);
 
   try {
-    const users = await User.find();
+    const users = await User.find().populate("orders.foods.food");
     res.status(201).json({ message: "Бүх хэрэглэгч олдлоо", users });
   } catch (error) {
     res.status(400).json({

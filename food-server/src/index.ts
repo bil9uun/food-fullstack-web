@@ -22,6 +22,9 @@ connectDB(MONGO_URI);
 
 app.use(cors());
 app.use(express.json());
+app.use("/", (req, res) => {
+  res.send("home");
+});
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/verify", verifyRoutes);
